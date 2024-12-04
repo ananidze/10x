@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10x: HomeWork1</title>
+</head>
+<body>
+    <h1 style="color: navy;">RAG: Retrieval Augmented Generation</h1>
+
+    <!-- Section: RAG -->
+    <div id="rag-section" class="content-section">
+        <h2>What is rag?</h2>
+        <p>
+            RAG is a technique for <b>augmenting LLM knowledge</b> with additional data. It 
+            dynamically retrieves relevant documents and incorporates them into AI responses.
+        </p>
+        <ul>
+            <li><a href="https://python.langchain.com/v0.1/docs/use_cases/sql/">Q&A over SQL data</a></li>
+            <li><a href="https://python.langchain.com/v0.1/docs/use_cases/code_understanding/">Q&A over code</a></li>
+        </ul>
+    </div>
+
+     <!-- Section: RAG Architecture  -->
+    <div id="architecture-section" class="content-section">
+        <h2>RAG Architecture</h2>
+        <p>RAG invovles two main components:</p>
+        <p><strong>Indexing</strong>: a pipeline for ingesting data from a source and indexing it. <em>This usually happens offline.</em></p>
+        <p><strong>Retrieval and generation</strong>: the actual RAG chain, which takes the user query at run time and retrieves the relevant data from the index, then passes that to the model.</p>
+
+        <h3><b>Indexing</b></h3>
+        <ol>
+            <li><b>Load:</b> First we need to load our data. this is done with <a href="https://python.langchain.com/v0.1/docs/modules/data_connection/document_loaders/">DocumentLoaders</a></li>
+            <li><b>Split</b>: <a href="https://python.langchain.com/v0.1/docs/modules/data_connection/document_transformers/">Text splitters</a>This is useful both for indexing data and for passing it in to a model, since large chunks are harder to search over and won't fit in a model's finite context window.</li>
+            <li><b>Store</b>: We need somewhere to store and index our splits, so that they can later be searched over. This is often done using a <a href="https://python.langchain.com/v0.1/docs/modules/data_connection/vectorstores/">Vector Store</a></li>
+        </ol>
+
+        <img src="https://python.langchain.com/v0.1/assets/images/rag_indexing-8160f90a90a33253d0154659cf7d453f.png" alt="rag-architecture" width="90%">
+    </div>
+
+    <!-- Section: Table of content -->
+    <h2><b><i>Table of contents</i></b></h2>
+    <ul>
+        <li><a href="https://python.langchain.com/v0.1/docs/use_cases/question_answering/quickstart/">Quickstart</a>: We recommend starting here. Many of the following guides assume you fully understand the architecture shown in the Quickstart.</li>
+        <li><a href="https://python.langchain.com/v0.1/docs/use_cases/question_answering/hybrid/">Hybrid search</a>: How to do hybrid search.</li>
+        <li><a href="https://python.langchain.com/v0.1/docs/use_cases/question_answering/per_user/">Per-user retrieval</a>: How to do retrieval when each user has their own private data</li>
+    </ul>
+
+    <!-- Section: Extra -->
+    <div style="text-align: center; background-color: yellow; text-decoration: none;">
+        <h2 style="background-color:tomato; color: green;">OUT OF CONTEXT SHEREKILEBI</h2>
+        <a href="https://youtu.be/B24sgNWEfuY?t=22" style="text-decoration: none;">
+            <p style="font-size: 32px;">± MC<sup>2</sup> F √(<sub>ვნებათა ღელვის ∞ && შეცნობილი აუცილებლობისა</sub>)</p>
+        </a>
+    </div>
+</body>
+</html>
