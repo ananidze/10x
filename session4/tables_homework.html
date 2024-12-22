@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 4 - Tables</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <section>
+            <h1>List of Participants</h1>
+            <table>
+                <caption>List of Participants</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>25</td>
+                        <td>john@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>30</td>
+                        <td>jane@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>Sam Brown</td>
+                        <td>22</td>
+                        <td>sam@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>Lisa White</td>
+                        <td>28</td>
+                        <td>lisa@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>Tom Green</td>
+                        <td>35</td>
+                        <td>tom@example.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section>
+            <h1>Weekly Activity Schedule</h1>
+            <table>
+                <caption>Weekly Activity Schedule</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Time</th>
+                        <th scope="col">Monday</th>
+                        <th scope="col">Tuesday</th>
+                        <th scope="col">Wednesday</th>
+                        <th scope="col">Thursday</th>
+                        <th scope="col">Friday</th>
+                        <th scope="col">Saturday</th>
+                        <th scope="col">Sunday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Morning</th>
+                        <td rowspan="3">Yoga Class</td>
+                        <td colspan="3">Team Meeting</td>
+                        <td></td>
+                        <td>Hiking</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Afternoon</th>
+                        <td></td>
+                        <td>Project Work</td>
+                        <td></td>
+                        <td></td>
+                        <td>Family Lunch</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Evening</th>
+                        <td>Dinner Party</td>
+                        <td></td>
+                        <td>Workout</td>
+                        <td>Movie Night</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h1>Shopping Cart</h1>
+            <table>
+                <caption>Shopping Cart</caption>
+                <thead>
+                    <tr>
+                        <th scope="col" id="item">Item Name</th>
+                        <th scope="col" id="quantity">Quantity</th>
+                        <th scope="col" id="price">Price per Item</th>
+                        <th scope="col" id="total">Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td headers="item">Apple</td>
+                        <td headers="quantity">3</td>
+                        <td headers="price">$1.00</td>
+                        <td headers="total">$3.00</td>
+                    </tr>
+                    <tr>
+                        <td headers="item">Banana</td>
+                        <td headers="quantity">5</td>
+                        <td headers="price">$0.50</td>
+                        <td headers="total">$2.50</td>
+                    </tr>
+                    <tr>
+                        <td headers="item">Milk</td>
+                        <td headers="quantity">2</td>
+                        <td headers="price">$1.50</td>
+                        <td headers="total">$3.00</td>
+                    </tr>
+                    <tr>
+                        <td headers="item">Bread</td>
+                        <td headers="quantity">1</td>
+                        <td headers="price">$2.00</td>
+                        <td headers="total">$2.00</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Total</td>
+                        <td>$10.50</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

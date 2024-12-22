@@ -1,0 +1,43 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+caption {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+thead th {
+  background-color: #f4f4f4;
+  text-align: left;
+  padding: 8px;
+}
+
+tbody td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tfoot td {
+  font-weight: bold;
+  background-color: #e0e0e0;
+  padding: 8px;
+}
+
+tbody tr:hover {
+  background-color: #d9edf7;
+}
+
+table:nth-of-type(2) td {
+  text-align: center;
+}
+
+table:nth-of-type(3) td {
+  text-align: right;
+}
