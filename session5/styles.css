@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: darkred;
+}
+
+nav ul li a:hover {
+    color: orange;
+    text-decoration: underline;
+}
+
+h1 {
+    text-align: center;
+    color: darkblue;
+}
+
+h2 {
+    font-size: 24px;
+    text-decoration: underline;
+}
+
+h3 {
+    font-size: 20px;
+    color: darkgreen;
+}
+
+p {
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+#about {
+    background-color: lightgray;
+    text-align: center;
+}
+
+#skills {
+    background-color: lightyellow;
+}
+
+#skills li {
+    font-weight: bold;
+}
+
+.project1 {
+    background-color: lightcoral;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid darkred;
+}
+
+.project2 {
+    background-color: lightblue;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid navy;
+}
+
+.project3 {
+    background-color: lightgreen;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid darkgreen;
+}
+
+img[src] {
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+#skills li::before {
+    content: "⭐ ";
+}
+
+#testimonials {
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+blockquote {
+    font-style: italic;
+    margin: 10px auto;
+    color: #555;
+    max-width: 600px;
+    text-align: left;
+}
