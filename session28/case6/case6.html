@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case #6: The Code Breaker</title>
+    <style>
+        #code-container {
+            display: flex;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .draggable {
+            width: 50px;
+            height: 50px;
+            background-color: lightblue;
+            margin: 5px;
+            text-align: center;
+            line-height: 50px;
+            cursor: grab;
+            border: 1px solid #333;
+        }
+        .drop-target {
+            width: 60px;
+            height: 60px;
+            border: 2px dashed #aaa;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .correct {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>Case #6: The Code Breaker</h1>
+    <p>Drag the items into the correct order (🔑, 🔒, 📜) to decode the message.</p>
+    <div id="code-container">
+      <div class="draggable" draggable="true" id="item1">🔑</div>
+      <div class="draggable" draggable="true" id="item2">🔒</div>
+      <div class="draggable" draggable="true" id="item3">📜</div>
+    </div>
+    <div id="drop-zones" style="display: flex;">
+        <div class="drop-target" data-expected="item1"></div>
+        <div class="drop-target" data-expected="item2"></div>
+        <div class="drop-target" data-expected="item3"></div>
+    </div>
+    <p id="decoded-text"></p>
+
+    <script src="case6.js"></script>
+</body>
+</html>

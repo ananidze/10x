@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case #9: The Hidden Data Vault</title>
+    <style>
+        #data-list li {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>Case #9: The Hidden Data Vault</h1>
+    <div class="data-container">
+        <p data-hidden="agent-X">🔍 Hidden Data #1</p>
+        <p>Regular Content</p>
+        <p data-hidden="mission-42">🔍 Hidden Data #2</p>
+        <span data-hidden="secret-code-123">Hidden Span Content</span>
+    </div>
+    <div>
+        <p>Some other content</p>
+        <div data-hidden="location-alpha">Nested Hidden Data</div>
+    </div>
+    <button onclick="extractHiddenData()">Extract Data</button>
+    <input type="text" id="search-input" placeholder="Search extracted data...">
+    <button onclick="searchData()">Search</button>
+    <h2>Extracted Data:</h2>
+    <ul id="data-list"></ul>
+
+    <script src="case9.js"></script>
+</body>
+</html>

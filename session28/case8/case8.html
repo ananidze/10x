@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case #8: The Shadow Network</title>
+</head>
+<body>
+    <h1>Case #8: The Shadow Network</h1>
+    <div class="network-node">
+      <p>Normal Text</p>
+      <p>Another Element</p>
+      <p data-message="Alpha">Secret Data</p>
+    </div>
+    <div class="network-node">
+      <p>Random Info</p>
+      <p>More Text</p>
+      <p data-message="Bravo">Hidden Message</p>
+    </div>
+    <div class="network-node">
+        <p>Noise</p>
+        <div><p>Nested Noise</p></div>
+        <p data-message="Charlie">Key Fragment</p>
+    </div>
+    <div class="not-a-node">
+        <p>Ignore this</p>
+        <p>Ignore this too</p>
+        <p data-message="Delta-Ignore">Should not be found</p>
+    </div>
+
+    <p>Decoded Transmission: <span id="decoded-transmission"></span></p>
+
+    <script src="case8.js"></script>
+</body>
+</html>

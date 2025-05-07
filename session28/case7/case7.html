@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case #7: Security Lock Bypass</title>
+    <style>
+        #lock-panel button {
+            font-size: 2em;
+            margin: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .active {
+            background-color: lightblue;
+        }
+        .error-animation {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Case #7: Security Lock Bypass</h1>
+    <div id="lock-panel">
+      <button class="lock-button" data-id="1">🔲</button>
+      <button class="lock-button" data-id="2">🔲</button>
+      <button class="lock-button" data-id="3">🔲</button>
+    </div>
+    <p id="lock-status">Enter Code</p>
+
+    <script src="case7.js"></script>
+</body>
+</html>
