@@ -1,6 +1,5 @@
-const API_KEY = 'd2a7ef303fff3ce0da03871d4f41eeec';
-const BASE_URL = 'https://api.openweathermap.org/data/2.5';
-const ONE_CALL_URL = 'https://api.openweathermap.org/data/3.0/onecall';
+const API_KEY = '39afbec6f14140c987263742251907'; // RASIZAMT AM API KEY-T???
+const BASE_URL = 'http://api.weatherapi.com/v1';
 
 const searchInput = document.querySelector('.search-input');
 const cityName = document.querySelector('.city-name');
@@ -11,74 +10,84 @@ const hourlyForecast = document.querySelector('.hourly-forecast');
 const conditionValues = document.querySelectorAll('.condition-value');
 const weeklyForecast = document.querySelector('.forecast-list');
 
-const weatherIcons = {
-    '01d': createSunIcon(),
-    '01n': createMoonIcon(),
-    '02d': createPartlyCloudyIcon(),
-    '02n': createPartlyCloudyIcon(),
-    '03d': createCloudyIcon(),
-    '03n': createCloudyIcon(),
-    '04d': createCloudyIcon(),
-    '04n': createCloudyIcon(),
-    '09d': createRainyIcon(),
-    '09n': createRainyIcon(),
-    '10d': createRainyIcon(),
-    '10n': createRainyIcon(),
-    '11d': createStormyIcon(),
-    '11n': createStormyIcon(),
-    '13d': createSnowyIcon(),
-    '13n': createSnowyIcon(),
-    '50d': createMistyIcon(),
-    '50n': createMistyIcon()
-};
+function getWeatherIcon(conditionCode) {
+    const code = parseInt(conditionCode);
+
+    // Sunny
+    if (code === 1000) return createSunIcon();
+
+    // Partly cloudy
+    if (code === 1003) return createPartlyCloudyIcon();
+
+    // Cloudy/Overcast
+    if (code === 1006 || code === 1009) return createCloudyIcon();
+
+    // Mist/Fog
+    if (code === 1030 || code === 1135 || code === 1147) return createMistyIcon();
+
+    // Thunderstorms
+    if (code >= 1087 && code <= 1087 || code >= 1273 && code <= 1282) return createStormyIcon();
+
+    // Snow conditions
+    if ((code >= 1066 && code <= 1066) || (code >= 1114 && code <= 1117) ||
+        (code >= 1210 && code <= 1225) || code === 1237 ||
+        (code >= 1255 && code <= 1264) || code === 1279 || code === 1282) {
+        return createSnowyIcon();
+    }
+
+    // Rain conditions (default for most precipitation)
+    return createRainyIcon();
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            const city = searchInput.value.trim();
-            if (city) {
-                getCurrentWeather(city);
-                searchInput.value = '';
-            }
-        }
+        if (e.key !== 'Enter') return;
+        
+        const city = searchInput.value.trim();
+        if (!city) return;
+        
+        getCurrentWeather(city);
+        searchInput.value = '';
     });
-    
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const { latitude, longitude } = position.coords;
-                getCurrentWeatherByCoords(latitude, longitude);
-            },
-            (error) => {
-                console.log('Geolocation error:', error);
-                getCurrentWeather('Madrid');
-            }
-        );
-    } else {
+
+    if (!navigator.geolocation) {
         getCurrentWeather('Madrid');
+        return;
     }
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const { latitude, longitude } = position.coords;
+            getCurrentWeatherByCoords(latitude, longitude);
+        },
+        (error) => {
+            console.log('Geolocation error:', error);
+            getCurrentWeather('Madrid');
+        }
+    );
 });
 
 async function getCurrentWeather(city) {
     try {
-        const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
-        console.log('Getting coordinates for city:', city);
-        
-        const geoResponse = await fetch(geoUrl);
-        if (!geoResponse.ok) {
-            throw new Error('Failed to get city coordinates');
+        const weatherUrl = `${BASE_URL}/forecast.json?key=${API_KEY}&q=${encodeURIComponent(city)}&days=7&aqi=no&alerts=no`;
+        console.log('Making weather API request to:', weatherUrl);
+
+        const weatherResponse = await fetch(weatherUrl);
+        console.log('Weather response status:', weatherResponse.status);
+
+        if (!weatherResponse.ok) {
+            const errorData = await weatherResponse.json();
+            console.error('Weather API Error:', errorData);
+            throw new Error(errorData.error?.message || 'Failed to fetch weather data');
         }
-        
-        const geoData = await geoResponse.json();
-        if (geoData.length === 0) {
-            throw new Error('City not found');
-        }
-        
-        const { lat, lon } = geoData[0];
-        console.log('Coordinates found:', lat, lon);
-        
-        await getCurrentWeatherByCoords(lat, lon);
-        
+
+        const weatherData = await weatherResponse.json();
+        console.log('Weather data received:', weatherData);
+
+        updateCurrentWeather(weatherData);
+        updateHourlyForecast(weatherData);
+        updateWeeklyForecast(weatherData);
+
     } catch (error) {
         console.error('Error fetching weather:', error);
         alert(`Error: ${error.message}`);
@@ -87,63 +96,43 @@ async function getCurrentWeather(city) {
 
 async function getCurrentWeatherByCoords(lat, lon) {
     try {
-        const weatherUrl = `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-        console.log('Making current weather API request to:', weatherUrl);
-        
+        const weatherUrl = `${BASE_URL}/forecast.json?key=${API_KEY}&q=${lat},${lon}&days=7&aqi=no&alerts=no`;
+        console.log('Making weather API request to:', weatherUrl);
+
         const weatherResponse = await fetch(weatherUrl);
         console.log('Weather response status:', weatherResponse.status);
-        
+
         if (!weatherResponse.ok) {
             const errorData = await weatherResponse.json();
             console.error('Weather API Error:', errorData);
-            throw new Error(errorData.message || 'Failed to fetch current weather data');
+            throw new Error(errorData.error?.message || 'Failed to fetch weather data');
         }
-        
+
         const weatherData = await weatherResponse.json();
-        console.log('Current weather data received:', weatherData);
-        
+        console.log('Weather data received:', weatherData);
+
         updateCurrentWeather(weatherData);
-        
-        const forecastUrl = `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-        console.log('Making forecast API request to:', forecastUrl);
-        
-        const forecastResponse = await fetch(forecastUrl);
-        console.log('Forecast response status:', forecastResponse.status);
-        
-        if (!forecastResponse.ok) {
-            const errorData = await forecastResponse.json();
-            console.error('Forecast API Error:', errorData);
-            throw new Error(errorData.message || 'Failed to fetch forecast data');
-        }
-        
-        const forecastData = await forecastResponse.json();
-        console.log('Forecast data received:', forecastData);
-        
-        updateHourlyForecast(forecastData);
-        updateWeeklyForecast(forecastData);
-        
+        updateHourlyForecast(weatherData);
+        updateWeeklyForecast(weatherData);
+
     } catch (error) {
         console.error('Error fetching weather by coordinates:', error);
         alert(`Error: ${error.message}`);
     }
 }
 
-
-
-
-
 function updateCurrentWeather(data) {
-    cityName.textContent = data.name;
-    temperature.textContent = `${Math.round(data.main.temp)}°`;
-    
-    const rainChanceValue = data.clouds ? data.clouds.all : 0;
+    cityName.textContent = data.location.name;
+    temperature.textContent = `${Math.round(data.current.temp_c)}°`;
+
+    // WeatherAPI.com provides chance of rain in forecast
+    const todayForecast = data.forecast.forecastday[0].day;
+    const rainChanceValue = todayForecast.daily_chance_of_rain || 0;
     rainChance.textContent = `Chance of rain: ${rainChanceValue}%`;
-    
-    const iconCode = data.weather[0].icon;
-    if (weatherIcons[iconCode]) {
-        weatherIcon.innerHTML = weatherIcons[iconCode];
-    }
-    
+
+    const iconCode = data.current.condition.code.toString();
+    weatherIcon.innerHTML = getWeatherIcon(iconCode);
+
     updateAirConditions(data);
 }
 
@@ -151,12 +140,12 @@ function updateCurrentWeather(data) {
 
 function updateAirConditions(data) {
     const conditions = [
-        `${Math.round(data.main.feels_like)}°`,
-        `${(data.wind ? data.wind.speed * 3.6 : 0).toFixed(1)} km/h`,
-        `${data.clouds ? data.clouds.all : 0}%`,
-        `${data.visibility ? Math.round(data.visibility / 1000) : 'N/A'} km`
+        `${Math.round(data.current.feelslike_c)}°`, // Feels like temperature
+        `${data.current.wind_kph.toFixed(1)} km/h`, // Wind speed (already in km/h)
+        `${data.current.cloud}%`, // Cloud coverage
+        `${data.current.vis_km} km` // Visibility (already in km)
     ];
-    
+
     conditionValues.forEach((element, index) => {
         if (conditions[index]) {
             element.textContent = conditions[index];
@@ -167,26 +156,36 @@ function updateAirConditions(data) {
 
 
 function updateHourlyForecast(data) {
-    const hourlyData = data.list.slice(0, 6);
-    
+    const hourlyData = data.forecast.forecastday[0].hour;
+    const currentHour = new Date().getHours();
+
+    // Get next 6 hours starting from current hour
+    const nextHours = [];
+    for (let i = 0; i < 6; i++) {
+        const hourIndex = (currentHour + i) % 24;
+        if (hourlyData[hourIndex]) {
+            nextHours.push(hourlyData[hourIndex]);
+        }
+    }
+
     hourlyForecast.innerHTML = '';
-    
-    hourlyData.forEach((item, index) => {
-        const time = new Date(item.dt * 1000);
+
+    nextHours.forEach((item, index) => {
+        const time = new Date(item.time);
         const hour = time.getHours();
         const timeString = `${hour}:00 ${hour >= 12 ? 'PM' : 'AM'}`;
-        
+
         const forecastItem = document.createElement('div');
         forecastItem.className = 'forecast-item';
-        
-        const iconCode = item.weather[0].icon;
-        
+
+        const iconCode = item.condition.code.toString();
+
         forecastItem.innerHTML = `
             <span class="time">${timeString}</span>
-            <div class="forecast-icon">${weatherIcons[iconCode] || ''}</div>
-            <span class="temp">${Math.round(item.main.temp)}°</span>
+            <div class="forecast-icon">${getWeatherIcon(iconCode)}</div>
+            <span class="temp">${Math.round(item.temp_c)}°</span>
         `;
-        
+
         hourlyForecast.appendChild(forecastItem);
     });
 }
@@ -194,65 +193,33 @@ function updateHourlyForecast(data) {
 
 
 function updateWeeklyForecast(data) {
-    const dailyData = {};
-    
-    data.list.forEach(item => {
-        const date = new Date(item.dt * 1000);
-        const dayKey = date.toDateString();
-        
-        if (!dailyData[dayKey]) {
-            dailyData[dayKey] = {
-                temps: [],
-                weather: item.weather[0],
-                date: date
-            };
-        }
-        
-        dailyData[dayKey].temps.push(item.main.temp);
-    });
-    
-    const days = Object.values(dailyData).slice(0, 7);
-    
+    const dailyData = data.forecast.forecastday;
+
     weeklyForecast.innerHTML = '';
-    
-    days.forEach((day, index) => {
-        const maxTemp = Math.round(Math.max(...day.temps));
-        const minTemp = Math.round(Math.min(...day.temps));
-        
-        const dayName = index === 0 ? 'Today' : day.date.toLocaleDateString('en', { weekday: 'short' });
-        const iconCode = day.weather.icon;
-        const condition = day.weather.main;
-        
+
+    dailyData.forEach((day, index) => {
+        const maxTemp = Math.round(day.day.maxtemp_c);
+        const minTemp = Math.round(day.day.mintemp_c);
+
+        const date = new Date(day.date);
+        const dayName = index === 0 ? 'Today' : date.toLocaleDateString('en', { weekday: 'short' });
+        const iconCode = day.day.condition.code.toString();
+        const condition = day.day.condition.text;
+
         const forecastDay = document.createElement('div');
         forecastDay.className = 'forecast-day';
-        
+
         forecastDay.innerHTML = `
             <span class="day">${dayName}</span>
             <div class="day-weather">
-                <div class="day-icon">${weatherIcons[iconCode] || ''}</div>
+                <div class="day-icon">${getWeatherIcon(iconCode)}</div>
                 <span class="day-condition">${condition}</span>
             </div>
             <span class="day-temp">${maxTemp}/${minTemp}</span>
         `;
-        
+
         weeklyForecast.appendChild(forecastDay);
     });
-}
-
-function getWeatherClass(weatherMain) {
-    const weatherClasses = {
-        'Clear': 'sunny',
-        'Clouds': 'cloudy',
-        'Rain': 'rainy',
-        'Drizzle': 'rainy',
-        'Thunderstorm': 'stormy',
-        'Snow': 'snowy',
-        'Mist': 'cloudy',
-        'Fog': 'cloudy',
-        'Haze': 'cloudy'
-    };
-    
-    return weatherClasses[weatherMain] || 'cloudy';
 }
 
 function createSunIcon() {
