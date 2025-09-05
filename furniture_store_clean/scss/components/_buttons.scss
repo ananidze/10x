@@ -1,0 +1,231 @@
+/*
+  Button component styles
+*/
+
+.btn {
+  @include button-base;
+  
+  // Primary button
+  &.btn-primary {
+    @include button-primary;
+  }
+  
+  // Secondary button
+  &.btn-secondary {
+    @include button-secondary;
+  }
+  
+  // Accent button
+  &.btn-accent {
+    @include button-base;
+    background-color: $accent-color;
+    color: white;
+    
+    &:hover {
+      background-color: darken($accent-color, 10%);
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+  }
+  
+  // Outline button
+  &.btn-outline {
+    @include button-base;
+    background-color: transparent;
+    color: $primary-color;
+    border: 2px solid $primary-color;
+    
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+  
+  // Ghost button
+  &.btn-ghost {
+    @include button-base;
+    background-color: transparent;
+    color: $text-color;
+    
+    &:hover {
+      background-color: $light-gray;
+      color: $secondary-color;
+    }
+  }
+  
+  // Danger button
+  &.btn-danger {
+    @include button-base;
+    background-color: #e74c3c;
+    color: white;
+    
+    &:hover {
+      background-color: darken(#e74c3c, 10%);
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+  }
+  
+  // Success button
+  &.btn-success {
+    @include button-base;
+    background-color: #27ae60;
+    color: white;
+    
+    &:hover {
+      background-color: darken(#27ae60, 10%);
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+  }
+}
+
+// Button sizes
+.btn-sm {
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-sm;
+}
+
+.btn-lg {
+  padding: $spacing-md $spacing-xl;
+  font-size: $font-size-lg;
+}
+
+.btn-xl {
+  padding: $spacing-lg $spacing-2xl;
+  font-size: $font-size-xl;
+}
+
+// Button states
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  
+  &:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.btn.loading {
+  position: relative;
+  color: transparent;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// Button groups
+.btn-group {
+  @include flex-center;
+  gap: $spacing-sm;
+  
+  &.btn-group-vertical {
+    flex-direction: column;
+  }
+  
+  &.btn-group-attached {
+    gap: 0;
+    
+    .btn {
+      border-radius: 0;
+      
+      &:first-child {
+        border-top-left-radius: $border-radius-md;
+        border-bottom-left-radius: $border-radius-md;
+      }
+      
+      &:last-child {
+        border-top-right-radius: $border-radius-md;
+        border-bottom-right-radius: $border-radius-md;
+      }
+      
+      &:not(:last-child) {
+        border-right: none;
+      }
+    }
+  }
+}
+
+// CTA (Call to Action) button
+.cta-button {
+  @include button-base;
+  background: linear-gradient(135deg, $secondary-color 0%, $accent-color 100%);
+  color: white;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  padding: $spacing-md $spacing-2xl;
+  box-shadow: $shadow-md;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-xl;
+    background: linear-gradient(135deg, darken($secondary-color, 5%) 0%, darken($accent-color, 5%) 100%);
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+// Icon buttons
+.btn-icon {
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  
+  &.btn-icon-sm {
+    width: 32px;
+    height: 32px;
+  }
+  
+  &.btn-icon-lg {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+// Floating action button
+.fab {
+  @include button-base;
+  @include flex-center;
+  position: fixed;
+  bottom: $spacing-xl;
+  right: $spacing-xl;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: $secondary-color;
+  color: white;
+  box-shadow: $shadow-lg;
+  z-index: $z-fixed;
+  
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: $shadow-xl;
+  }
+}
+
+// Animations
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
