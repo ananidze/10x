@@ -1,0 +1,18 @@
+/* Error: Undefined variable.
+ *   ,
+ * 3 |   background: linear-gradient(135deg, $color-dark 0%, lighten($color-dark, 10%) 100%);
+ *   |                                       ^^^^^^^^^^^
+ *   '
+ *   scss/layout/_footer.scss 3:39  @import
+ *   scss/main.scss 16:9            root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a   \2577 \a 3 \2502    background: linear-gradient(135deg, $color-dark 0%, lighten($color-dark, 10%) 100%);\a   \2502                                        ^^^^^^^^^^^\a   \2575 \a   scss/layout/_footer.scss 3:39  @import\a   scss/main.scss 16:9            root stylesheet";
+}
