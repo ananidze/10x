@@ -1,0 +1,27 @@
+/*
+  Main SCSS file - Furniture Store
+  Imports all partial files in the correct order
+*/
+
+// 1. Abstracts - Variables, mixins, functions
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+// 2. Base - Reset, typography, base styles
+@import 'base/reset';
+@import 'base/typography';
+
+// 3. Layout - Header, footer, navigation, grid
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/grid';
+
+// 4. Components - Buttons, cards, forms, etc.
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/hero';
+@import 'components/navigation';
+
+// 5. Utilities - Helper classes
+@import 'utilities/spacing';
+@import 'utilities/display';

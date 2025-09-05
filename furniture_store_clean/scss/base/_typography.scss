@@ -1,0 +1,178 @@
+/*
+  Typography styles
+*/
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-secondary;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $text-color;
+  margin-bottom: $spacing-md;
+}
+
+h1 {
+  font-size: $font-size-5xl;
+  
+  @include respond-to(md) {
+    font-size: 3.5rem;
+  }
+}
+
+h2 {
+  font-size: $font-size-4xl;
+  
+  @include respond-to(md) {
+    font-size: 2.75rem;
+  }
+}
+
+h3 {
+  font-size: $font-size-3xl;
+  
+  @include respond-to(md) {
+    font-size: 2.25rem;
+  }
+}
+
+h4 {
+  font-size: $font-size-2xl;
+  
+  @include respond-to(md) {
+    font-size: 1.75rem;
+  }
+}
+
+h5 {
+  font-size: $font-size-xl;
+}
+
+h6 {
+  font-size: $font-size-lg;
+}
+
+/* Paragraphs */
+p {
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $text-color;
+  margin-bottom: $spacing-md;
+  
+  &.lead {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+    color: $text-light;
+  }
+  
+  &.small {
+    font-size: $font-size-sm;
+    color: $text-light;
+  }
+}
+
+/* Links */
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $secondary-color;
+    text-decoration: underline;
+  }
+  
+  &:focus {
+    outline: 2px solid $accent-color;
+    outline-offset: 2px;
+  }
+}
+
+/* Text utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-primary {
+  color: $primary-color;
+}
+
+.text-secondary {
+  color: $secondary-color;
+}
+
+.text-accent {
+  color: $accent-color;
+}
+
+.text-light {
+  color: $text-light;
+}
+
+.text-white {
+  color: white;
+}
+
+.font-light {
+  font-weight: $font-weight-light;
+}
+
+.font-normal {
+  font-weight: $font-weight-normal;
+}
+
+.font-medium {
+  font-weight: $font-weight-medium;
+}
+
+.font-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+.font-bold {
+  font-weight: $font-weight-bold;
+}
+
+.text-xs {
+  font-size: $font-size-xs;
+}
+
+.text-sm {
+  font-size: $font-size-sm;
+}
+
+.text-base {
+  font-size: $font-size-base;
+}
+
+.text-lg {
+  font-size: $font-size-lg;
+}
+
+.text-xl {
+  font-size: $font-size-xl;
+}
+
+.text-2xl {
+  font-size: $font-size-2xl;
+}
+
+.text-3xl {
+  font-size: $font-size-3xl;
+}
+
+.text-4xl {
+  font-size: $font-size-4xl;
+}
+
+.text-5xl {
+  font-size: $font-size-5xl;
+}
