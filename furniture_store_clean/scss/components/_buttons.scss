@@ -1,99 +1,103 @@
+@use "sass:color";
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+
 /*
   Button component styles
 */
 
 .btn {
-  @include button-base;
+  @include mixins.button-base;
   
   // Primary button
   &.btn-primary {
-    @include button-primary;
+    @include mixins.button-primary;
   }
   
   // Secondary button
   &.btn-secondary {
-    @include button-secondary;
+    @include mixins.button-secondary;
   }
   
   // Accent button
   &.btn-accent {
-    @include button-base;
-    background-color: $accent-color;
+    @include mixins.button-base;
+    background-color: variables.$accent-color;
     color: white;
     
     &:hover {
-      background-color: darken($accent-color, 10%);
+      background-color: color.adjust(variables.$accent-color, $lightness: -10%);
       transform: translateY(-2px);
-      box-shadow: $shadow-lg;
+      box-shadow: variables.$shadow-lg;
     }
   }
   
   // Outline button
   &.btn-outline {
-    @include button-base;
+    @include mixins.button-base;
     background-color: transparent;
-    color: $primary-color;
-    border: 2px solid $primary-color;
+    color: variables.$primary-color;
+    border: 2px solid variables.$primary-color;
     
     &:hover {
-      background-color: $primary-color;
+      background-color: variables.$primary-color;
       color: white;
     }
   }
   
   // Ghost button
   &.btn-ghost {
-    @include button-base;
+    @include mixins.button-base;
     background-color: transparent;
-    color: $text-color;
+    color: variables.$text-color;
     
     &:hover {
-      background-color: $light-gray;
-      color: $secondary-color;
+      background-color: variables.$light-gray;
+      color: variables.$secondary-color;
     }
   }
   
   // Danger button
   &.btn-danger {
-    @include button-base;
+    @include mixins.button-base;
     background-color: #e74c3c;
     color: white;
     
     &:hover {
-      background-color: darken(#e74c3c, 10%);
+      background-color: color.adjust(#e74c3c, $lightness: -10%);
       transform: translateY(-2px);
-      box-shadow: $shadow-lg;
+      box-shadow: variables.$shadow-lg;
     }
   }
   
   // Success button
   &.btn-success {
-    @include button-base;
+    @include mixins.button-base;
     background-color: #27ae60;
     color: white;
     
     &:hover {
-      background-color: darken(#27ae60, 10%);
+      background-color: color.adjust(#27ae60, $lightness: -10%);
       transform: translateY(-2px);
-      box-shadow: $shadow-lg;
+      box-shadow: variables.$shadow-lg;
     }
   }
 }
 
 // Button sizes
 .btn-sm {
-  padding: $spacing-xs $spacing-md;
-  font-size: $font-size-sm;
+  padding: variables.$spacing-xs variables.$spacing-md;
+  font-size: variables.$font-size-sm;
 }
 
 .btn-lg {
-  padding: $spacing-md $spacing-xl;
-  font-size: $font-size-lg;
+  padding: variables.$spacing-md variables.$spacing-xl;
+  font-size: variables.$font-size-lg;
 }
 
 .btn-xl {
-  padding: $spacing-lg $spacing-2xl;
-  font-size: $font-size-xl;
+  padding: variables.$spacing-lg variables.$spacing-2xl;
+  font-size: variables.$font-size-xl;
 }
 
 // Button states
@@ -129,8 +133,8 @@
 
 // Button groups
 .btn-group {
-  @include flex-center;
-  gap: $spacing-sm;
+  @include mixins.flex-center;
+  gap: variables.$spacing-sm;
   
   &.btn-group-vertical {
     flex-direction: column;
@@ -143,13 +147,13 @@
       border-radius: 0;
       
       &:first-child {
-        border-top-left-radius: $border-radius-md;
-        border-bottom-left-radius: $border-radius-md;
+        border-top-left-radius: variables.$border-radius-md;
+        border-bottom-left-radius: variables.$border-radius-md;
       }
       
       &:last-child {
-        border-top-right-radius: $border-radius-md;
-        border-bottom-right-radius: $border-radius-md;
+        border-top-right-radius: variables.$border-radius-md;
+        border-bottom-right-radius: variables.$border-radius-md;
       }
       
       &:not(:last-child) {
@@ -161,18 +165,18 @@
 
 // CTA (Call to Action) button
 .cta-button {
-  @include button-base;
-  background: linear-gradient(135deg, $secondary-color 0%, $accent-color 100%);
+  @include mixins.button-base;
+  background: linear-gradient(135deg, variables.$secondary-color 0%, variables.$accent-color 100%);
   color: white;
-  font-size: $font-size-lg;
-  font-weight: $font-weight-semibold;
-  padding: $spacing-md $spacing-2xl;
-  box-shadow: $shadow-md;
+  font-size: variables.$font-size-lg;
+  font-weight: variables.$font-weight-semibold;
+  padding: variables.$spacing-md variables.$spacing-2xl;
+  box-shadow: variables.$shadow-md;
   
   &:hover {
     transform: translateY(-3px);
-    box-shadow: $shadow-xl;
-    background: linear-gradient(135deg, darken($secondary-color, 5%) 0%, darken($accent-color, 5%) 100%);
+    box-shadow: variables.$shadow-xl;
+    background: linear-gradient(135deg, color.adjust(variables.$secondary-color, $lightness: -5%) 0%, color.adjust(variables.$accent-color, $lightness: -5%) 100%);
   }
   
   &:active {
@@ -182,7 +186,7 @@
 
 // Icon buttons
 .btn-icon {
-  @include flex-center;
+  @include mixins.flex-center;
   width: 40px;
   height: 40px;
   padding: 0;
@@ -201,22 +205,22 @@
 
 // Floating action button
 .fab {
-  @include button-base;
-  @include flex-center;
+  @include mixins.button-base;
+  @include mixins.flex-center;
   position: fixed;
-  bottom: $spacing-xl;
-  right: $spacing-xl;
+  bottom: variables.$spacing-xl;
+  right: variables.$spacing-xl;
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: $secondary-color;
+  background-color: variables.$secondary-color;
   color: white;
-  box-shadow: $shadow-lg;
-  z-index: $z-fixed;
+  box-shadow: variables.$shadow-lg;
+  z-index: variables.$z-fixed;
   
   &:hover {
     transform: scale(1.1);
-    box-shadow: $shadow-xl;
+    box-shadow: variables.$shadow-xl;
   }
 }
 

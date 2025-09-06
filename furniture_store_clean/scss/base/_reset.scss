@@ -1,3 +1,5 @@
+@use "../abstracts/variables";
+
 /*
   CSS Reset - Modern normalize and custom resets
 */
@@ -36,11 +38,11 @@ html {
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
-  line-height: $line-height-normal;
-  font-family: $font-primary;
-  font-size: $font-size-base;
-  color: $text-color;
-  background-color: $background-color;
+  line-height: variables.$line-height-normal;
+  font-family: variables.$font-primary;
+  font-size: variables.$font-size-base;
+  color: variables.$text-color;
+  background-color: variables.$background-color;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -111,7 +113,7 @@ textarea {
 input:focus,
 textarea:focus,
 select:focus {
-  outline: 2px solid $accent-color;
+  outline: 2px solid variables.$accent-color;
   outline-offset: 2px;
 }
 

@@ -1,22 +1,24 @@
+@use "variables";
+
 // Responsive breakpoints
 @mixin respond-to($breakpoint) {
   @if $breakpoint == sm {
-    @media (min-width: $breakpoint-sm) {
+    @media (min-width: variables.$breakpoint-sm) {
       @content;
     }
   }
   @if $breakpoint == md {
-    @media (min-width: $breakpoint-md) {
+    @media (min-width: variables.$breakpoint-md) {
       @content;
     }
   }
   @if $breakpoint == lg {
-    @media (min-width: $breakpoint-lg) {
+    @media (min-width: variables.$breakpoint-lg) {
       @content;
     }
   }
   @if $breakpoint == xl {
-    @media (min-width: $breakpoint-xl) {
+    @media (min-width: variables.$breakpoint-xl) {
       @content;
     }
   }
@@ -57,56 +59,56 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: $spacing-sm $spacing-lg;
+  padding: variables.$spacing-sm variables.$spacing-lg;
   border: none;
-  border-radius: $border-radius-md;
-  font-family: $font-primary;
-  font-weight: $font-weight-medium;
+  border-radius: variables.$border-radius-md;
+  font-family: variables.$font-primary;
+  font-weight: variables.$font-weight-medium;
   text-decoration: none;
   cursor: pointer;
-  transition: all $transition-normal;
+  transition: all variables.$transition-normal;
   
   &:focus {
-    outline: 2px solid $accent-color;
+    outline: 2px solid variables.$accent-color;
     outline-offset: 2px;
   }
 }
 
 @mixin button-primary {
   @include button-base;
-  background-color: $primary-color;
+  background-color: variables.$primary-color;
   color: white;
   
   &:hover {
-    background-color: $hover-color;
+    background-color: variables.$hover-color;
     transform: translateY(-2px);
-    box-shadow: $shadow-lg;
+    box-shadow: variables.$shadow-lg;
   }
 }
 
 @mixin button-secondary {
   @include button-base;
   background-color: transparent;
-  color: $primary-color;
-  border: 2px solid $primary-color;
+  color: variables.$primary-color;
+  border: 2px solid variables.$primary-color;
   
   &:hover {
-    background-color: $primary-color;
+    background-color: variables.$primary-color;
     color: white;
   }
 }
 
 // Card styles
 @mixin card {
-  background-color: $background-color;
-  border-radius: $border-radius-lg;
-  box-shadow: $shadow-md;
+  background-color: variables.$background-color;
+  border-radius: variables.$border-radius-lg;
+  box-shadow: variables.$shadow-md;
   overflow: hidden;
-  transition: all $transition-normal;
+  transition: all variables.$transition-normal;
   
   &:hover {
     transform: translateY(-4px);
-    box-shadow: $shadow-xl;
+    box-shadow: variables.$shadow-xl;
   }
 }
 
